@@ -43,49 +43,86 @@ namespace Parse
 	
         private Scanner scanner;
 
-        public Parser(Scanner s) { scanner = s; }
-  
-        public Node parseExp()
-        {
-			// TODO: write code for parsing an exp
+        public Parser(Scanner s) {
+			scanner = s;
+			tokens = new Token[BUFSIZE];
+		}
+
+		private const int BUFSIZE = 1000;
+		private int i = 0;
+		Token[] tokens;
+
+		public Node parseExp()
+		{
 			Token tok = scanner.getNextToken();
+			if ( tok != null )
+			{
+				TokenType tt = tok.getType();
+			}
+
+			if (tok != null )
+			{
+				tokens[i] = tok;
+				//Console.Out.WriteLine(tokens[i].getIntVal());
+				i++;
+				parseExp();
+			}
+
+			for (int x=0; x < tokens.Length; x++ )
+			{
+				if(tokens[x]!=null)
+					Console.Out.WriteLine(tokens[x].getName());
+			}
+
+			return null;
+			
+			// TODO: write code for parsing an exp
+			/*Token tok = scanner.getNextToken();
 			TokenType tt = tok.getType();
 
+			if ( tt == TokenType.LPAREN )
+			{
+				//Cons newCons = new Tree.Cons(tok., new Nil());
+				Console.Out.WriteLine("yolo");
+				//return newCons;
+			}
 			if ( tt == TokenType.IDENT )
 			{
 				Ident identifier = new Ident(tok.getName());
-				Console.Out.WriteLine("****PRINTING IDENT****");
+				//Console.Out.WriteLine("****PRINTING IDENT****");
 				return identifier;
 			}
 			else if ( tt == TokenType.INT )
 			{
 				IntLit integer = new IntLit(tok.getIntVal());
-				Console.Out.WriteLine("****PRINTING INT****");
+				//Console.Out.WriteLine("****PRINTING INT****");
 				return integer;
 			}
 			else if ( tt == TokenType.TRUE )
 			{
 				BoolLit boolean = new BoolLit(true);
-				Console.Out.WriteLine("****PRINTING BOOL****");
+				//Console.Out.WriteLine("****PRINTING BOOL****");
 				return boolean;
 			}
 			else if ( tt == TokenType.FALSE )
 			{
 				BoolLit boolean = new BoolLit(false);
-				Console.Out.WriteLine("****PRINTING BOOL****");
+				//Console.Out.WriteLine("****PRINTING BOOL****");
 				return boolean;
 			}
 			else if ( tt == TokenType.STRING )
 			{
 				StringLit str = new StringLit(tok.getStringVal());
-				Console.Out.WriteLine("****PRINTING STRING****");
+				//Console.Out.WriteLine("****PRINTING STRING****");
 				return str;
 			}
 			else
 				return null;
-        }
-  
-        protected Node parseRest()
+				*/
+				
+		}
+
+		protected Node parseRest()
         {
             // TODO: write code for parsing a rest
             return null;

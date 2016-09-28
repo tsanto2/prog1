@@ -57,7 +57,7 @@ namespace Parse
 					return null;
 				}
 
-				else if ( (char) ch == 10 || (char) ch == 13 || (char) ch == 32 )
+				else if ( (char) ch == 10 || (char) ch == 13 || (char) ch == 32 || (char) ch == 9 )
 				{
 					if ( lParenCount != rParenCount )
 						return getNextToken();

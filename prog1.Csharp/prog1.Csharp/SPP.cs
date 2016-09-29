@@ -53,9 +53,10 @@ public class SPP
         root = parser.parseExp();
         while (root != null) 
         {
-            root.print(0);
+            //root.print(0);
             root = parser.parseExp();
-        }
+			Array.Clear(parser.tokens, 0, parser.tokens.Length);
+		}
 
         return 0;
     }

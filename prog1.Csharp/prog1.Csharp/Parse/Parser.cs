@@ -50,85 +50,84 @@ namespace Parse
 
 		private const int BUFSIZE = 1000;
 		private int i = 0;
-		Token[] tokens;
+		private int x = 1;
+		public Token[] tokens;
+
+		private int LParenCount, RParenCount;
 
 		public Node parseExp()
 		{
-			Token tok = scanner.getNextToken();
-			if ( tok != null )
-			{
-				TokenType tt = tok.getType();
-			}
+			Token tok = null;
 
-			if (tok != null )
+			do
 			{
-				tokens[i] = tok;
-				//Console.Out.WriteLine(tokens[i].getIntVal());
-				i++;
-				parseExp();
-			}
+				tok = scanner.getNextToken();
+				if ( tok != null )
+				{
+					TokenType tt = tok.getType();
+					tokens[i] = tok;
+					i++;
+				}
+			} while ( tok != null );
 
-			for (int x=0; x < tokens.Length; x++ )
+			if ( tokens[0] != null )
 			{
-				if(tokens[x]!=null)
-					Console.Out.WriteLine(tokens[x].getName());
+				TokenType tt = tokens[0].getType();
+
+				if (tt == TokenType.LPAREN )
+				{
+					++LParenCount;
+					if ( tokens[1] != null )
+					{
+						if ( tokens[1].getType() == TokenType.IDENT )
+						{
+							Ident newIdent = new Ident(tokens[1].getName());
+							print(tokens[1].getName());
+							Cons newCons = new Cons(newIdent, parseRest());
+							return newCons;
+						}
+					}
+				}
 			}
 
 			return null;
-			
-			// TODO: write code for parsing an exp
-			/*Token tok = scanner.getNextToken();
-			TokenType tt = tok.getType();
-
-			if ( tt == TokenType.LPAREN )
-			{
-				//Cons newCons = new Tree.Cons(tok., new Nil());
-				Console.Out.WriteLine("yolo");
-				//return newCons;
-			}
-			if ( tt == TokenType.IDENT )
-			{
-				Ident identifier = new Ident(tok.getName());
-				//Console.Out.WriteLine("****PRINTING IDENT****");
-				return identifier;
-			}
-			else if ( tt == TokenType.INT )
-			{
-				IntLit integer = new IntLit(tok.getIntVal());
-				//Console.Out.WriteLine("****PRINTING INT****");
-				return integer;
-			}
-			else if ( tt == TokenType.TRUE )
-			{
-				BoolLit boolean = new BoolLit(true);
-				//Console.Out.WriteLine("****PRINTING BOOL****");
-				return boolean;
-			}
-			else if ( tt == TokenType.FALSE )
-			{
-				BoolLit boolean = new BoolLit(false);
-				//Console.Out.WriteLine("****PRINTING BOOL****");
-				return boolean;
-			}
-			else if ( tt == TokenType.STRING )
-			{
-				StringLit str = new StringLit(tok.getStringVal());
-				//Console.Out.WriteLine("****PRINTING STRING****");
-				return str;
-			}
-			else
-				return null;
-				*/
-				
 		}
 
 		protected Node parseRest()
         {
+			Cons newCons;
+
             // TODO: write code for parsing a rest
-            return null;
+			if(tokens[x+1].getType() == TokenType.IDENT )
+			{
+				Ident newIdent = new Ident(tokens[x + 1].getName());
+				x++;
+				print(tokens[x].getName());
+				newCons = new Cons(newIdent, parseRest());
+				return newCons;
+			}
+			else if (tokens[x+1].getType() == TokenType.RPAREN)
+			{
+				++RParenCount;
+				//if (RParenCount == LParenCount )
+				//{
+					return new Nil();
+				//}
+			}
+			else
+			{
+				newCons = null;
+				return newCons;
+			}
         }
 
         // TODO: Add any additional methods you might need.
+
+		// To make printing easier...
+		void print(String str )
+		{
+			Console.Out.WriteLine(str);
+		}
     }
 }
 

@@ -58,6 +58,8 @@ namespace Parse
 		public Node parseExp()
 		{
 			Token tok = null;
+			
+			Array.Clear(tokens, 0, i);
 
 			do
 			{
@@ -77,6 +79,7 @@ namespace Parse
 				if (tt == TokenType.LPAREN )
 				{
 					++LParenCount;
+					print("(");
 					if ( tokens[1] != null )
 					{
 						if ( tokens[1].getType() == TokenType.IDENT )
@@ -84,6 +87,9 @@ namespace Parse
 							Ident newIdent = new Ident(tokens[1].getName());
 							print(tokens[1].getName());
 							Cons newCons = new Cons(newIdent, parseRest());
+							i = 0;
+							x = 1;
+							scanner.ResetValues();
 							return newCons;
 						}
 					}
@@ -100,15 +106,18 @@ namespace Parse
             // TODO: write code for parsing a rest
 			if(tokens[x+1].getType() == TokenType.IDENT )
 			{
+				print(" ");
 				Ident newIdent = new Ident(tokens[x + 1].getName());
 				x++;
 				print(tokens[x].getName());
 				newCons = new Cons(newIdent, parseRest());
 				return newCons;
 			}
+
 			else if (tokens[x+1].getType() == TokenType.RPAREN)
 			{
 				++RParenCount;
+				print(")\n");
 				//if (RParenCount == LParenCount )
 				//{
 					return new Nil();
@@ -126,7 +135,7 @@ namespace Parse
 		// To make printing easier...
 		void print(String str )
 		{
-			Console.Out.WriteLine(str);
+			Console.Out.Write(str);
 		}
     }
 }

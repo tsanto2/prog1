@@ -33,7 +33,11 @@ namespace Tree
  
         public override void print(int n)
         {
-            form.print(this, n, false);
+			// Added null check for testing
+			if ( form != null )
+			{
+				form.print(this, n, false);
+			}
         }
 
         public override void print(int n, bool p)

@@ -59,7 +59,7 @@ namespace Parse
 
 				else if ( (char) ch == 10 || (char) ch == 13 || (char) ch == 32 || (char) ch == 9 )
 				{
-					if ( lParenCount != rParenCount )
+					if ( lParenCount != rParenCount || (lParenCount == 0) )
 						return getNextToken();
 					else
 						return null;
@@ -191,6 +191,12 @@ namespace Parse
                 return null;
             }
         }
+
+		public void ResetValues ()
+		{
+			lParenCount = 0;
+			rParenCount = 0;
+		}
     }
 
 }

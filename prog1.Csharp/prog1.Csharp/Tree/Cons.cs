@@ -29,12 +29,53 @@ namespace Tree
         {
 			if ( car.isSymbol() )
 			{
-				if ( car.GetName() == "define" )
+                if (car.GetName() == "begin" )
+                {
+                    form = new Begin();
+                }
+
+                if (car.GetName() == "cond")
+                {
+                    form = new Cond();
+                }
+
+                if ( car.GetName() == "define" )
 				{
 					form = new Define();
 					//Console.Out.WriteLine("Define special form created.");
 				}
-			}
+
+                if (car.GetName() == "if")
+                {
+                    form = new If();
+                }
+
+                if (car.GetName() == "lambda")
+                {
+                    form = new Lambda();
+                }
+
+                if (car.GetName() == "let")
+                {
+                    form = new Let();
+                }
+
+                if (car.GetName() == "quote")
+                {
+                    form = new Quote();
+                }
+
+                if (car.GetName() == "regular")             //Default if (!car.isSymbol())?
+                {
+                    form = new Begin();
+                }
+
+                if (car.GetName() == "set")
+                {
+                    form = new Set();
+                }
+
+            }
             // TODO: implement this function and any helper functions
             // you might need.
         }

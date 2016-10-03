@@ -9,7 +9,6 @@ public class SPP
 {
     public static int Main(string[] args)
     {
-		// Bananas
         // Create scanner that reads from standard input
         Scanner scanner = new Scanner(Console.In);
         

@@ -111,7 +111,6 @@ namespace Parse
 
 					while ( In.Peek() != 13 && In.Peek() != 32 && In.Peek() != 34 && In.Peek() != 40 && In.Peek() != 41 && length < BUFSIZE )
 					{
-						// Console.Out.WriteLine(length);
 						buf[length] = (char) In.Read();
 						length++;
 					}

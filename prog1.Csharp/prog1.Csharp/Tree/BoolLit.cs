@@ -12,6 +12,11 @@ namespace Tree
         {
             boolVal = b;
         }
+
+		public bool GetValue ()
+		{
+			return boolVal;
+		}
   
         public override void print(int n)
         {

@@ -82,16 +82,38 @@ namespace Parse
 					print("(");
 					if ( tokens[1] != null )
 					{
+						Cons newCons;
+
 						if ( tokens[1].getType() == TokenType.IDENT )
 						{
 							Ident newIdent = new Ident(tokens[1].getName());
 							print(tokens[1].getName());
-							Cons newCons = new Cons(newIdent, parseRest());
-							i = 0;
-							x = 1;
-							scanner.ResetValues();
-							return newCons;
+							print(" ");
+							newCons = new Cons(newIdent, parseRest());
 						}
+						else if ( tokens[1].getType() == TokenType.INT )
+						{
+							IntLit newInt = new IntLit(tokens[1].getIntVal());
+							print(tokens[1].getIntVal().ToString());
+							print(" ");
+							newCons = new Cons(newInt, parseRest());
+						}
+						else if ( tokens[1].getType() == TokenType.STRING )
+						{
+							StringLit newString = new StringLit(tokens[1].getStringVal());
+							print("'" + tokens[1].getStringVal());
+							print("' ");
+							newCons = new Cons(newString, parseRest());
+						}
+						else
+						{
+							newCons = null;
+						}
+
+						i = 0;
+						x = 1;
+						scanner.ResetValues();
+						return newCons;
 					}
 				}
 			}
@@ -104,24 +126,82 @@ namespace Parse
 			Cons newCons;
 
             // TODO: write code for parsing a rest
-			if(tokens[x+1].getType() == TokenType.IDENT )
+			if ( tokens[x+1].getType() == TokenType.IDENT )
 			{
-				print(" ");
 				Ident newIdent = new Ident(tokens[x + 1].getName());
 				x++;
 				print(tokens[x].getName());
+				if (tokens[x+1].getType() != TokenType.RPAREN)
+					print(" ");
 				newCons = new Cons(newIdent, parseRest());
+				return newCons;
+			}
+			else if ( tokens[x + 1].getType() == TokenType.INT )
+			{
+				IntLit newInt = new IntLit(tokens[x + 1].getIntVal());
+				x++;
+				print(tokens[x].getIntVal().ToString());
+				if ( tokens[x + 1].getType() != TokenType.RPAREN )
+					print(" ");
+				newCons = new Cons(newInt, parseRest());
+				return newCons;
+			}
+			else if ( tokens[x + 1].getType() == TokenType.STRING )
+			{
+				StringLit newString = new StringLit(tokens[x + 1].getStringVal());
+				x++;
+				print("'" + tokens[x].getStringVal() + "'");
+				if ( tokens[x + 1].getType() != TokenType.RPAREN )
+					print(" ");
+				newCons = new Cons(newString, parseRest());
+				return newCons;
+			}
+			else if ( tokens[x + 1].getType() == TokenType.TRUE || tokens[x + 1].getType() == TokenType.FALSE )
+			{
+				TokenType tt = tokens[x + 1].getType();
+				BoolLit newBool;
+
+				if ( tt == TokenType.TRUE ) {
+					newBool = new BoolLit(true);
+					print("#t");
+				}
+				else
+				{
+					newBool = new BoolLit(false);
+					print("#f");
+				}
+
+				x++;
+
+				if ( tokens[x + 1].getType() != TokenType.RPAREN )
+					print(" ");
+				newCons = new Cons(newBool, parseRest());
+				return newCons;
+			}
+			else if (tokens[x+1].getType() == TokenType.LPAREN)
+			{
+				++LParenCount;
+				print("(");
+
+				newCons = new Cons(GetCar(), parseRest());
 				return newCons;
 			}
 
 			else if (tokens[x+1].getType() == TokenType.RPAREN)
 			{
 				++RParenCount;
-				print(")\n");
-				//if (RParenCount == LParenCount )
-				//{
+				if ( RParenCount == LParenCount )
+				{
+					print("\n");
+					print(")\n");
 					return new Nil();
-				//}
+				}
+				else
+				{
+					x++;
+					print(") ");
+					return parseRest();
+				}
 			}
 			else
 			{
@@ -129,6 +209,22 @@ namespace Parse
 				return newCons;
 			}
         }
+
+		Node GetCar ()
+		{
+			++x;
+
+			if ( tokens[x + 1].getType() == TokenType.IDENT )
+			{
+				Ident newIdent = new Ident(tokens[x + 1].getName());
+				print(tokens[x].getName());
+				return newIdent;
+			}
+			else
+			{
+				return new Nil();
+			}
+		}
 
         // TODO: Add any additional methods you might need.
 

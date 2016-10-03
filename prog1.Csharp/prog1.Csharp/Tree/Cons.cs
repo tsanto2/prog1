@@ -27,6 +27,14 @@ namespace Tree
         // parsing up to the interpreter.
         void parseList()
         {
+			if ( car.isSymbol() )
+			{
+				if ( car.GetName() == "define" )
+				{
+					form = new Define();
+					//Console.Out.WriteLine("Define special form created.");
+				}
+			}
             // TODO: implement this function and any helper functions
             // you might need.
         }

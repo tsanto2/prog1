@@ -105,6 +105,16 @@ namespace Parse
 							print("' ");
 							newCons = new Cons(newString, parseRest());
 						}
+						else if ( tokens[1].getType() == TokenType.LPAREN )
+						{
+							++LParenCount;
+							print("(");
+							--x;
+							
+							newCons = new Cons(GetCar(), parseRest());
+
+							return newCons;
+						}
 						else
 						{
 							newCons = null;
@@ -229,7 +239,7 @@ namespace Parse
         // TODO: Add any additional methods you might need.
 
 		// To make printing easier...
-		void print(String str )
+		void print(String str)
 		{
 			Console.Out.Write(str);
 		}

@@ -134,41 +134,42 @@ namespace Parse
 		protected Node parseRest()
         {
 			Cons newCons;
+            x++;
 
             // TODO: write code for parsing a rest
 			if ( tokens[x+1].getType() == TokenType.IDENT )
 			{
-				Ident newIdent = new Ident(tokens[x + 1].getName());
-				x++;
+				Ident newIdent = new Ident(tokens[x].getName());
 				print(tokens[x].getName());
+                // TODO: Remove this lookahead statement
 				if (tokens[x+1].getType() != TokenType.RPAREN)
 					print(" ");
 				newCons = new Cons(newIdent, parseRest());
 				return newCons;
 			}
-			else if ( tokens[x + 1].getType() == TokenType.INT )
+			else if ( tokens[x].getType() == TokenType.INT )
 			{
-				IntLit newInt = new IntLit(tokens[x + 1].getIntVal());
-				x++;
+				IntLit newInt = new IntLit(tokens[x].getIntVal());
 				print(tokens[x].getIntVal().ToString());
+                // TODO: Remove this lookahead statement
 				if ( tokens[x + 1].getType() != TokenType.RPAREN )
 					print(" ");
 				newCons = new Cons(newInt, parseRest());
 				return newCons;
 			}
-			else if ( tokens[x + 1].getType() == TokenType.STRING )
+			else if ( tokens[x].getType() == TokenType.STRING )
 			{
 				StringLit newString = new StringLit(tokens[x + 1].getStringVal());
-				x++;
 				print("'" + tokens[x].getStringVal() + "'");
-				if ( tokens[x + 1].getType() != TokenType.RPAREN )
+                // TODO: Remove this lookahead statement
+                if ( tokens[x + 1].getType() != TokenType.RPAREN )
 					print(" ");
 				newCons = new Cons(newString, parseRest());
 				return newCons;
 			}
-			else if ( tokens[x + 1].getType() == TokenType.TRUE || tokens[x + 1].getType() == TokenType.FALSE )
+			else if ( tokens[x].getType() == TokenType.TRUE || tokens[x].getType() == TokenType.FALSE )
 			{
-				TokenType tt = tokens[x + 1].getType();
+				TokenType tt = tokens[x].getType();
 				BoolLit newBool;
 
 				if ( tt == TokenType.TRUE ) {
@@ -181,14 +182,13 @@ namespace Parse
 					print("#f");
 				}
 
-				x++;
-
-				if ( tokens[x + 1].getType() != TokenType.RPAREN )
+                // TODO: Remove this lookahead statement
+                if ( tokens[x + 1].getType() != TokenType.RPAREN )
 					print(" ");
 				newCons = new Cons(newBool, parseRest());
 				return newCons;
 			}
-			else if (tokens[x+1].getType() == TokenType.LPAREN)
+			else if (tokens[x].getType() == TokenType.LPAREN)
 			{
 				++LParenCount;
 				print("(");
@@ -197,7 +197,7 @@ namespace Parse
 				return newCons;
 			}
 
-			else if (tokens[x+1].getType() == TokenType.RPAREN)
+			else if (tokens[x].getType() == TokenType.RPAREN)
 			{
 				++RParenCount;
 				if ( RParenCount == LParenCount )

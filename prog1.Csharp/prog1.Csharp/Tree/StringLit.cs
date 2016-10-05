@@ -1,31 +1,33 @@
-// StringLit -- Parse tree node class for representing string literals
+// Nil -- Parse tree node class for representing the empty list
 
 using System;
 
 namespace Tree
 {
-    public class StringLit : Node
-    {
-        private string stringVal;
+	public class Nil : Node
+	{
+		public Nil() { }
 
-        public StringLit(string s)
-        {
-            stringVal = s;
-        }
+		public override void print(int n)
+		{
+			print(n, false);
+		}
 
-		public override bool isString ()
+		public override bool isNull ()
 		{
 			return true;
 		}
 
-		public override void print(int n)
-        {
-	    // There got to be a more efficient way to print n spaces.
-	    for (int i = 0; i < n; i++)
-                Console.Write(" ");
+		public override void print(int n, bool p) {
+		// There got to be a more efficient way to print n spaces.
+		for (int i = 0; i < n; i++)
+				Console.Write(" ");
 
-            Console.WriteLine("\"" + stringVal + "\"");
-        }
-    }
+			if (p)
+				Console.WriteLine(")");
+			else
+				Console.WriteLine("()");
+		}
+	}
 }
 

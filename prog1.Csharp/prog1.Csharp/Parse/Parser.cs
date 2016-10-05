@@ -243,5 +243,5 @@ namespace Parse
 		{
 			Console.Out.Write(str);
 		}
-    }
+	}
 }

@@ -39,11 +39,13 @@ using Tree;
 
 namespace Parse
 {
-    public class Parser {
-	
-        private Scanner scanner;
+	public class Parser
+	{
 
-        public Parser(Scanner s) {
+		private Scanner scanner;
+
+		public Parser ( Scanner s )
+		{
 			scanner = s;
 			tokens = new Token[BUFSIZE];
 		}
@@ -55,10 +57,10 @@ namespace Parse
 
 		private int LParenCount, RParenCount;
 
-		public Node parseExp()
+		public Node parseExp ()
 		{
 			Token tok = null;
-			
+
 			Array.Clear(tokens, 0, i);
 
 			do
@@ -76,7 +78,7 @@ namespace Parse
 			{
 				TokenType tt = tokens[0].getType();
 
-				if (tt == TokenType.LPAREN )
+				if ( tt == TokenType.LPAREN )
 				{
 					++LParenCount;
 					print("(");
@@ -110,7 +112,7 @@ namespace Parse
 							++LParenCount;
 							print("(");
 							--x;
-							
+
 							newCons = new Cons(GetCar(), parseRest());
 
 							return newCons;
@@ -131,17 +133,17 @@ namespace Parse
 			return null;
 		}
 
-		protected Node parseRest()
-        {
+		protected Node parseRest ()
+		{
 			Cons newCons;
 
-            // TODO: write code for parsing a rest
-			if ( tokens[x+1].getType() == TokenType.IDENT )
+			// TODO: write code for parsing a rest
+			if ( tokens[x + 1].getType() == TokenType.IDENT )
 			{
 				Ident newIdent = new Ident(tokens[x + 1].getName());
 				x++;
 				print(tokens[x].getName());
-				if (tokens[x+1].getType() != TokenType.RPAREN)
+				if ( tokens[x + 1].getType() != TokenType.RPAREN )
 					print(" ");
 				newCons = new Cons(newIdent, parseRest());
 				return newCons;
@@ -171,7 +173,8 @@ namespace Parse
 				TokenType tt = tokens[x + 1].getType();
 				BoolLit newBool;
 
-				if ( tt == TokenType.TRUE ) {
+				if ( tt == TokenType.TRUE )
+				{
 					newBool = new BoolLit(true);
 					print("#t");
 				}
@@ -188,7 +191,7 @@ namespace Parse
 				newCons = new Cons(newBool, parseRest());
 				return newCons;
 			}
-			else if (tokens[x+1].getType() == TokenType.LPAREN)
+			else if ( tokens[x + 1].getType() == TokenType.LPAREN )
 			{
 				++LParenCount;
 				print("(");
@@ -197,7 +200,7 @@ namespace Parse
 				return newCons;
 			}
 
-			else if (tokens[x+1].getType() == TokenType.RPAREN)
+			else if ( tokens[x + 1].getType() == TokenType.RPAREN )
 			{
 				++RParenCount;
 				if ( RParenCount == LParenCount )
@@ -218,7 +221,7 @@ namespace Parse
 				newCons = null;
 				return newCons;
 			}
-        }
+		}
 
 		Node GetCar ()
 		{
@@ -236,13 +239,12 @@ namespace Parse
 			}
 		}
 
-        // TODO: Add any additional methods you might need.
+		// TODO: Add any additional methods you might need.
 
 		// To make printing easier...
-		void print(String str)
+		void print ( String str )
 		{
 			Console.Out.Write(str);
 		}
-    }
+	}
 }
-

@@ -42,22 +42,129 @@ namespace Parse
 	public class Parser
 	{
 
+		#region Variables
+
 		private Scanner scanner;
+		private bool tokensRead;
 
-		public Parser ( Scanner s ) { scanner = s; }
+		private const int BUFSIZE = 1000;
+		private int i;
+		public Token[] tokens;
 
+		#endregion
+
+		public Parser ( Scanner s ) {
+			scanner = s;
+			tokens = new Token[BUFSIZE];
+		}
+		
 		public Node parseExp ()
 		{
-			// TODO: write code for parsing an exp
+			// Read all tokens of expression into our buffer array
+			if ( !tokensRead )
+				ReadTokens();
+
+			TokenType tt = tokens[i].getType();
+
+			// If we have left parenthesis, go to next token, parse rest
+			if ( tt == TokenType.LPAREN )
+			{
+				print("(");
+				i++;
+				parseRest();
+			}
+			// If our token is an identifier...
+			else if (tt == TokenType.IDENT )
+			{
+				print(tokens[i].getName());
+				Ident newIdent = new Ident(tokens[i].getName());
+				i++;
+
+				return newIdent;
+			}
+			// If our token is an integer...
+			else if ( tt == TokenType.INT )
+			{
+				print(tokens[i].getIntVal().ToString());
+				IntLit newInt = new IntLit(tokens[i].getIntVal());
+				i++;
+
+				return newInt;
+			}
+			// If our token is a string...
+			else if ( tt == TokenType.STRING )
+			{
+				print(tokens[i].getStringVal());
+				StringLit newStr = new StringLit(tokens[i].getStringVal());
+				i++;
+
+				return newStr;
+			}
+
 			return null;
 		}
 
 		protected Node parseRest ()
 		{
-			// TODO: write code for parsing a rest
-			return null;
+			Node car, cdr;
+			Cons newCons;
+
+			TokenType tt = tokens[i].getType();
+
+			if ( tt != TokenType.RPAREN )
+			{
+				car = parseExp();
+				cdr = parseCdr();
+				newCons = new Cons(car, cdr);
+
+				return newCons;
+			}
+			else
+			{
+				return new Nil();
+			}
 		}
 
-		// TODO: Add any additional methods you might need.
+		Node parseCdr ()
+		{
+			TokenType tt = tokens[i].getType();
+
+			// If we have adot, cdr is next token, not a nil
+			if (tt == TokenType.DOT )
+			{
+				i++;
+				print(".");
+
+				return parseExp();
+			}
+
+			return parseRest();
+		}
+
+		// This method reads all tokens from the scanner into the buffer array
+		void ReadTokens ()
+		{
+			Token tok;
+
+			do
+			{
+				tok = scanner.getNextToken();
+
+				if ( tok != null )
+				{
+					tokens[i] = tok;
+					i++;
+				}
+			} while ( tok != null );
+
+			i = 0;
+			tokensRead = true;
+		}
+
+		// Convenient printing method
+		void print(string str )
+		{
+			Console.Out.WriteLine(str);
+		}
 	}
 }

@@ -34,45 +34,45 @@ namespace Tree
 					form = new Begin();
 				}
 
-				if (car.GetName() == "cond")
+				else if (car.GetName() == "cond")
 				{
 					form = new Cond();
 				}
 
-				if ( car.GetName() == "define" )
+				else if ( car.GetName() == "define" )
 				{
 					form = new Define();
 					//Console.Out.WriteLine("Define special form created.");
 				}
 
-				if (car.GetName() == "if")
+				else if ( car.GetName() == "if")
 				{
 					form = new If();
 				}
 
-				if (car.GetName() == "lambda")
+				else if ( car.GetName() == "lambda")
 				{
 					form = new Lambda();
 				}
 
-				if (car.GetName() == "let")
+				else if ( car.GetName() == "let")
 				{
 					form = new Let();
 				}
 
-				if (car.GetName() == "quote")
+				else if ( car.GetName() == "quote")
 				{
 					form = new Quote();
 				}
 
-				if (car.GetName() == "regular")             //Default if (!car.isSymbol())?
-				{
-					form = new Begin();
-				}
-
-				if (car.GetName() == "set")
+				else if ( car.GetName() == "set")
 				{
 					form = new Set();
+				}
+
+				else if ( car.GetName() == "regular" )
+				{
+					form = new Begin();
 				}
 
 			}

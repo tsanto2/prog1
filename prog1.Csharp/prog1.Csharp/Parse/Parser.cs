@@ -100,6 +100,29 @@ namespace Parse
 
 				return newStr;
 			}
+			// If our token is a true bool...
+			else if ( tt == TokenType.TRUE )
+			{
+				print("#t");
+				BoolLit newBool = new BoolLit(true);
+				i++;
+
+				return newBool;
+			}
+			// If our token is a false bool...
+			else if ( tt == TokenType.FALSE )
+			{
+				print("#f");
+				BoolLit newBool = new BoolLit(false);
+				i++;
+
+				return newBool;
+			}
+			// If our token is a QUOTE...
+			else if ( tt == TokenType.QUOTE )
+			{
+
+			}
 
 			return null;
 		}
@@ -121,6 +144,7 @@ namespace Parse
 			}
 			else
 			{
+				print(")");
 				return new Nil();
 			}
 		}

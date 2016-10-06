@@ -173,7 +173,14 @@ namespace Parse
 					int tempLength = length;
 					//checkDone(ch);
 
-					return new IdentToken(new String(tempBuf, 0, tempLength));
+					string tempString = new String(tempBuf, 0, tempLength);
+
+					if (tempString == "quote" )
+					{
+						return new Token(TokenType.QUOTE);
+					}
+
+					return new IdentToken(tempString);
 				}
 
 				// Illegal character

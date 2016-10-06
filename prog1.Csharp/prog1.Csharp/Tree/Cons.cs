@@ -42,7 +42,7 @@ namespace Tree
 				else if ( car.GetName() == "define" )
 				{
 					form = new Define();
-					//Console.Out.WriteLine("Define special form created.");
+					Console.Out.WriteLine("Define special form created.");
 				}
 
 				else if ( car.GetName() == "if")
@@ -70,9 +70,10 @@ namespace Tree
 					form = new Set();
 				}
 
-				else if ( car.GetName() == "regular" )
+				else
 				{
-					form = new Begin();
+					form = new Regular();
+					Console.Out.WriteLine("Regular form created.");
 				}
 
 			}
@@ -90,7 +91,7 @@ namespace Tree
 			// Added null check for testing
 			if ( form != null )
 			{
-				form.print(this, n, false);
+				form.print(this, n, true);
 			}
 		}
 

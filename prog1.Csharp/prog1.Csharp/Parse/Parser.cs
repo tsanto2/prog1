@@ -64,6 +64,9 @@ namespace Parse
 			if ( !tokensRead )
 				ReadTokens();
 
+			if ( tokens[i] == null )
+				return null;
+
 			TokenType tt = tokens[i].getType();
 
 			// If we have left parenthesis, go to next token, parse rest

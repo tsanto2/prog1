@@ -14,6 +14,7 @@ namespace Tree
 		{
 			car = a;
 			cdr = d;
+			form = new Regular();
 			parseList();
 		}
 
@@ -33,52 +34,53 @@ namespace Tree
 				{
 					form = new Begin();
 				}
-
 				else if (car.GetName() == "cond")
 				{
 					form = new Cond();
 				}
-
 				else if ( car.GetName() == "define" )
 				{
 					form = new Define();
 					Console.Out.WriteLine("Define special form created.");
 				}
-
 				else if ( car.GetName() == "if")
 				{
 					form = new If();
 				}
-
 				else if ( car.GetName() == "lambda")
 				{
 					form = new Lambda();
 				}
-
 				else if ( car.GetName() == "let")
 				{
 					form = new Let();
 				}
-
 				else if ( car.GetName() == "quote")
 				{
 					form = new Quote();
 				}
-
 				else if ( car.GetName() == "set")
 				{
 					form = new Set();
 				}
-
 				else
 				{
 					form = new Regular();
-					Console.Out.WriteLine("Regular form created.");
 				}
 
 			}
 			// TODO: implement this function and any helper functions
 			// you might need.
+		}
+
+		public override Node getCar ()
+		{
+			return car;
+		}
+
+		public override Node getCdr ()
+		{
+			return cdr;
 		}
 
 		public override bool isPair ()
@@ -91,7 +93,7 @@ namespace Tree
 			// Added null check for testing
 			if ( form != null )
 			{
-				form.print(this, n, true);
+				form.print(this, n, false);
 			}
 		}
 

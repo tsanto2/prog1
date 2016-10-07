@@ -57,7 +57,7 @@ namespace Parse
 			scanner = s;
 			tokens = new Token[BUFSIZE];
 		}
-		
+
 		public Node parseExp ()
 		{
 			// Read all tokens of expression into our buffer array
@@ -69,14 +69,15 @@ namespace Parse
 			// If we have left parenthesis, go to next token, parse rest
 			if ( tt == TokenType.LPAREN )
 			{
-				print("(");
+				//print("(");
 				i++;
-				parseRest();
+
+				return parseRest();
 			}
 			// If our token is an identifier...
 			else if (tt == TokenType.IDENT )
 			{
-				print(tokens[i].getName());
+				//print(tokens[i].getName());
 				Ident newIdent = new Ident(tokens[i].getName());
 				i++;
 
@@ -85,7 +86,7 @@ namespace Parse
 			// If our token is an integer...
 			else if ( tt == TokenType.INT )
 			{
-				print(tokens[i].getIntVal().ToString());
+				//print(tokens[i].getIntVal().ToString());
 				IntLit newInt = new IntLit(tokens[i].getIntVal());
 				i++;
 
@@ -94,7 +95,7 @@ namespace Parse
 			// If our token is a string...
 			else if ( tt == TokenType.STRING )
 			{
-				print(tokens[i].getStringVal());
+				//print(tokens[i].getStringVal());
 				StringLit newStr = new StringLit(tokens[i].getStringVal());
 				i++;
 
@@ -103,7 +104,7 @@ namespace Parse
 			// If our token is a true bool...
 			else if ( tt == TokenType.TRUE )
 			{
-				print("#t");
+				//print("#t");
 				BoolLit newBool = new BoolLit(true);
 				i++;
 
@@ -112,7 +113,7 @@ namespace Parse
 			// If our token is a false bool...
 			else if ( tt == TokenType.FALSE )
 			{
-				print("#f");
+				//print("#f");
 				BoolLit newBool = new BoolLit(false);
 				i++;
 
@@ -121,6 +122,7 @@ namespace Parse
 			// If our token is a QUOTE...
 			else if ( tt == TokenType.QUOTE )
 			{
+				//print("\'");
 
 			}
 
@@ -144,7 +146,9 @@ namespace Parse
 			}
 			else
 			{
-				print(")");
+				//print(")");
+				i++;
+
 				return new Nil();
 			}
 		}
@@ -157,7 +161,7 @@ namespace Parse
 			if (tt == TokenType.DOT )
 			{
 				i++;
-				print(".");
+				//print(".");
 
 				return parseExp();
 			}

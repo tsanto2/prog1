@@ -19,7 +19,7 @@ namespace Tree
 				Console.Write("(");
 			}
 
-			t.getCar().print(n);
+			t.getCar().print(0);
 
 			Node rest = t.getCdr();
 
@@ -27,20 +27,21 @@ namespace Tree
 			{
 				Console.Write(" ");
 				rest.getCar().print(n, false);
-				Console.WriteLine();
 
 				if ( rest.getCdr().getCar().isPair() )
 				{
 					for ( int i = Console.CursorLeft; i < n + 4; i++ )
 						Console.Write(" ");
-					Console.Write("(");
 				}
 
-				while ( (rest = rest.getCdr()) != Nil.getNil() )
+				rest = rest.getCdr();
+				while ( !rest.isNull() )
 				{
-					rest.getCar().print(n + 4, true);
-					Console.WriteLine();
+					rest.getCar().print(n + 4, false);
+
+					rest = rest.getCdr();
 				}
+
 				Console.Write(")");
 			}
 			else

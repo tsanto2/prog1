@@ -125,8 +125,14 @@ namespace Parse
 			// If our token is a QUOTE...
 			else if ( tt == TokenType.QUOTE )
 			{
-				//print("\'");
-
+                //print("\'");
+                Ident newIdent = new Ident("quote");
+                i++;
+                Node newNode = parseExp();
+                if (newNode.isNull())
+                    return new Cons(newIdent, newNode);
+                else
+                    return new Cons(newIdent, new Cons(newNode, new Nil()));
 			}
 
 			return null;

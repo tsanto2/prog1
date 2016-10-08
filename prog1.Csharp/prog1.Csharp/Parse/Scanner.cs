@@ -175,10 +175,6 @@ namespace Parse
 
 					string tempString = new String(tempBuf, 0, tempLength);
 
-					if (tempString == "quote" )
-					{
-						return new Token(TokenType.QUOTE);
-					}
 
 					return new IdentToken(tempString);
 				}

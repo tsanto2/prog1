@@ -15,30 +15,29 @@ namespace Tree
 				Console.Write(" ");
 
 			if ( !p )
+			{
 				Console.Write("(");
-
-			t.getCar().print(n);
-
-			Console.Write(" ");
-
-			Node second = t.getCdr().getCar();
-			if ( second.isPair() )
-			{
-				second.print(n, false);
 			}
 
-			Console.WriteLine();
+			Console.Write("lambda ");
 
-			Node term = t.getCdr().getCdr();
+			t.getCdr().getCar().print(0, false);
 
-			while ( !term.isNull() )
+			Node temp = t.getCdr().getCdr();
+
+			while ( !temp.isNull() )
 			{
-				term.getCar().print(n + 4);
-				term = term.getCdr();
-				Console.WriteLine();
+				if ( !temp.getCar().isPair() )
+				{
+					temp.getCar().print(n + 4);
+					Console.WriteLine();
+				}
+				else
+					temp.getCar().print(n + 4, false);
+				temp = temp.getCdr();
 			}
 
-			Nil.getNil().print(n, true);
+			temp.print(n, true);
 		}
 	}
 }

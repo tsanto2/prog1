@@ -30,7 +30,7 @@ namespace Tree
 					Console.Write(" ");
 			}
 
-			Nil.getNil().print(n, true);
+			//Nil.getNil().print(n, true);
 		}
 	}
 }

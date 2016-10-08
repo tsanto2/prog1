@@ -41,7 +41,6 @@ namespace Tree
 				else if ( car.GetName() == "define" )
 				{
 					form = new Define();
-					Console.Out.WriteLine("Define special form created.");
 				}
 				else if ( car.GetName() == "if")
 				{
@@ -90,7 +89,7 @@ namespace Tree
 
 		public override void print(int n)
 		{
-			// Added null check for testing
+			// Added null check
 			if ( form != null )
 			{
 				form.print(this, n, false);

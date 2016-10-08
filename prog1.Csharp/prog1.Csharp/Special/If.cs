@@ -14,22 +14,30 @@ namespace Tree
 			for ( int i = Console.CursorLeft; i < n; i++ )
 				Console.Write(" ");
 
+			if ( !p )
+			{
+				Console.Write("(");
+			}
+
 			Console.Write("if ");
 
 			t.getCdr().getCar().print(0, false);
 
-			Console.WriteLine();
+			Node temp = t.getCdr().getCdr();
 
-			Node blocks = t.getCdr().getCdr();
-
-			while ( !blocks.isNull() )
+			while ( !temp.isNull() )
 			{
-				blocks.getCar().print(n + 4);
-				Console.WriteLine();
-				blocks = blocks.getCdr();
+				if ( !temp.getCar().isPair() )
+				{
+					temp.getCar().print(n + 4);
+					Console.WriteLine();
+				}
+				else
+					temp.getCar().print(n + 4, false);
+				temp = temp.getCdr();
 			}
 
-			blocks.print(n, true);
+			temp.print(n, true);
 		}
 	}
 }

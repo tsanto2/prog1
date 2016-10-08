@@ -12,12 +12,13 @@ namespace Tree
 		{
 			for ( int i = Console.CursorLeft; i < n; i++ )
 				Console.Write(" ");
+
 			if ( !p )
 			{
 				Console.Write("(");
 			}
 
-			t.getCar().print(n);
+			t.getCar().print(0);
 
 			Console.WriteLine();
 
@@ -26,12 +27,15 @@ namespace Tree
 			if ( rest.isPair() )
 			{
 				rest.getCar().print(n + 4, false);
-				Console.WriteLine();
-				while ( (rest = rest.getCdr()) != Nil.getNil() )
+
+				rest = rest.getCdr();
+				while ( !rest.isNull() )
 				{
 					rest.getCar().print(n + 4, false);
-					Console.WriteLine();
+
+					rest = rest.getCdr();
 				}
+
 				Console.Write(")");
 			}
 			else t.getCdr().print(n, true);

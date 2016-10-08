@@ -28,10 +28,13 @@ namespace Tree
 				Console.Write(" ");
 				rest.getCar().print(n, false);
 
-				if ( rest.getCdr().getCar().isPair() )
+				if ( rest.getCdr().getCar() != null )
 				{
-					for ( int i = Console.CursorLeft; i < n + 4; i++ )
-						Console.Write(" ");
+					if ( rest.getCdr().getCar().isPair() )
+					{
+						for ( int i = Console.CursorLeft; i < n + 4; i++ )
+							Console.Write(" ");
+					}
 				}
 
 				rest = rest.getCdr();

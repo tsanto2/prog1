@@ -39,7 +39,7 @@ namespace Tree
 				t.getCdr().print(n, true);
 			else if ( t.getCdr().isNull() )
 			{
-				t.getCdr().print(0, true);
+				t.getCdr().print(n, true);
 			}
 			else
 			{

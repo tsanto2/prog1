@@ -6,7 +6,6 @@ namespace Tree
 {
 	public class Begin : Special
 	{
-
 		public Begin () { }
 
 		public override void print ( Node t, int n, bool p )
@@ -19,7 +18,7 @@ namespace Tree
 				Console.Write("(");
 			}
 
-			t.getCar().print(n);
+			t.getCar().print(0);
 
 			Console.WriteLine();
 

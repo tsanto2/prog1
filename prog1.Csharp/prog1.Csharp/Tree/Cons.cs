@@ -94,6 +94,7 @@ namespace Tree
 			if ( form != null )
 			{
 				form.print(this, n, false);
+				Console.WriteLine();
 			}
 		}
 

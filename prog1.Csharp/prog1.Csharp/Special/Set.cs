@@ -19,13 +19,14 @@ namespace Tree
 				Console.Write("(");
 			}
 
-			t.getCar().print(n);
+			//t.getCar().print(n);
+			Console.Write("set!");
 
 			if ( t.getCar().isPair() )
 			{
 				t.getCar().print(n + 4, true);
 			}
-			else t.getCdr().print(n, true);
+			else t.getCdr().print(0, true);
 		}
 	}
 }

@@ -26,10 +26,21 @@ namespace Tree
 
 			Node car = t.getCar();
 
-			car.print(n, !car.isPair());
+			if ( !car.isPair() )
+			{
+				car.print(0, true);
+			}
+			else
+			{
+				car.print(n, false);
+			}
 
-			if ( t.getCdr().isPair() || t.getCdr().isNull() )
+			if ( t.getCdr().isPair() )
 				t.getCdr().print(n, true);
+			else if ( t.getCdr().isNull() )
+			{
+				t.getCdr().print(0, true);
+			}
 			else
 			{
 				Console.Write(" . ");

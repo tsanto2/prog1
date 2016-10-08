@@ -45,10 +45,10 @@ namespace Parse
 		#region Variables
 
 		private Scanner scanner;
-		private bool tokensRead, isRoot;
+		private bool tokensRead;
 
 		private const int BUFSIZE = 1000;
-		private int i, lParen, rParen, tokCount;
+		private int i, lParen, rParen, tokCount, itCount;
 		public Token[] tokens;
 
 		#endregion
@@ -72,9 +72,6 @@ namespace Parse
 			// If we have left parenthesis, go to next token, parse rest
 			if ( tt == TokenType.LPAREN )
 			{
-				if ( i == 0 || (i == 1 && tokens[0].getType() != TokenType.LPAREN) )
-					isRoot = true;
-
 				//print("(");
 				i++;
 
@@ -150,15 +147,18 @@ namespace Parse
 
 			if ( tt != TokenType.RPAREN )
 			{
+				itCount++;
 				car = parseExp();
 				cdr = parseCdr();
 				newCons = new Cons(car, cdr);
 
-				if ( isRoot )
+				if ( itCount == 1 )
 				{
 					resetParser();
 					scanner.ResetValues();
 				}
+
+				itCount--;
 
 				return newCons;
 			}
@@ -227,7 +227,8 @@ namespace Parse
 		{
 			Array.Clear(tokens, 0, tokCount);
 			i = lParen = rParen = tokCount = 0;
-			tokensRead = isRoot = false;
+			itCount = 1;
+			tokensRead = false;
 		}
 
 		// Convenient debug printing method

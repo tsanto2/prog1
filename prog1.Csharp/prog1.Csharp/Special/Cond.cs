@@ -22,23 +22,25 @@ namespace Tree
 
 			Console.WriteLine();
 
-			Node rest = t.getCdr();
+			Node cdr = t.getCdr();
 
-			if ( rest.isPair() )
+			if ( cdr.isPair() )
 			{
-				rest.getCar().print(n + 4, false);
+				cdr.getCar().print(n + 4, false);
+				Console.WriteLine();
 
-				rest = rest.getCdr();
-				while ( !rest.isNull() )
+				cdr = cdr.getCdr();
+				while ( !cdr.isNull() )
 				{
-					rest.getCar().print(n + 4, false);
-
-					rest = rest.getCdr();
+					cdr.getCar().print(n + 4, false);
+					Console.WriteLine();
+					cdr = cdr.getCdr();
 				}
 
-				Console.Write(")");
+				cdr.print(n, true);
 			}
-			else t.getCdr().print(n, true);
+			else
+				t.getCdr().print(n, true);
 		}
 	}
 }

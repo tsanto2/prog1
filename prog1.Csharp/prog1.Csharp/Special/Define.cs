@@ -26,7 +26,7 @@ namespace Tree
 			if ( rest.getCar().isPair() )
 			{
 				Console.Write(" ");
-				rest.getCar().print(n, false);
+				rest.getCar().print(n + 4, false);
 
 				if ( rest.getCdr().getCar() != null )
 				{

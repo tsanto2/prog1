@@ -27,6 +27,7 @@ namespace Tree
 			{
 				Console.Write(" ");
 				rest.getCar().print(n + 4, false);
+				Console.WriteLine();
 
 				if ( rest.getCdr().getCar() != null )
 				{
@@ -44,7 +45,7 @@ namespace Tree
 
 					rest = rest.getCdr();
 				}
-
+				Console.WriteLine();
 				Console.Write(")");
 			}
 			else

@@ -27,7 +27,8 @@ namespace Tree
 			if ( cdr.isPair() )
 			{
 				cdr.getCar().print(n + 4, false);
-				Console.WriteLine();
+				if (!cdr.getCar().isPair())
+					Console.WriteLine();
 
 				cdr = cdr.getCdr();
 				while ( !cdr.isNull() )

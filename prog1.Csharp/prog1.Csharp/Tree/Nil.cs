@@ -34,10 +34,10 @@ namespace Tree
 
 			if ( p )
 			{
-				Console.WriteLine(")");
+				Console.Write(")");
 			}
 			else
-				Console.WriteLine("()");
+				Console.Write("()");
 		}
 	}
 }

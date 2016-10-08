@@ -22,6 +22,7 @@ namespace Tree
 			Console.Write("if ");
 
 			t.getCdr().getCar().print(0, false);
+			Console.WriteLine();
 
 			Node temp = t.getCdr().getCdr();
 
@@ -36,6 +37,8 @@ namespace Tree
 					temp.getCar().print(n + 4, false);
 				temp = temp.getCdr();
 			}
+
+			Console.WriteLine();
 
 			temp.print(n, true);
 		}

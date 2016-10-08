@@ -4,17 +4,28 @@ using System;
 
 namespace Tree
 {
-    public class Set : Special
-    {
-        // TODO: Add any fields needed.
- 
-        // TODO: Add an appropriate constructor.
-	public Set() { }
-	
-        public override void print(Node t, int n, bool p)
-        {
-            // TODO: Implement this function.
-        }
-    }
-}
+	public class Set : Special
+	{
+		public Set () { }
 
+		public override void print ( Node t, int n, bool p )
+		{
+			for ( int i = Console.CursorLeft; i < n; i++ )
+				Console.Write(" ");
+
+
+			if ( !p )
+			{
+				Console.Write("(");
+			}
+
+			t.getCar().print(n);
+
+			if ( t.getCar().isPair() )
+			{
+				t.getCar().print(n + 4, true);
+			}
+			else t.getCdr().print(n, true);
+		}
+	}
+}

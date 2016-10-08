@@ -4,18 +4,43 @@ using System;
 
 namespace Tree
 {
-    public class Cond : Special
-    {
-        // TODO: Add any fields needed.
+	public class Cond : Special
+	{
+		public Cond () { }
 
-        // TODO: Add an appropriate constructor.
-	public Cond() { }
+		public override void print ( Node t, int n, bool p )
+		{
+			for ( int i = Console.CursorLeft; i < n; i++ )
+				Console.Write(" ");
 
-        public override void print(Node t, int n, bool p)
-        { 
-            // TODO: Implement this function.
-        }
-    }
+			if ( !p )
+			{
+				Console.Write("(");
+			}
+
+			t.getCar().print(n);
+
+			Console.WriteLine();
+
+			Node rest = t.getCdr();
+
+			if ( rest.isPair() )
+			{
+				rest.getCar().print(n + 4, false);
+				Console.WriteLine();
+
+				while ( (rest = rest.getCdr()) != Nil.getNil() )
+				{
+					rest.getCar().print(n + 4, false);
+					Console.WriteLine();
+				}
+
+				Nil.getNil().print(n, true);
+			}
+
+			else t.getCdr().print(n, true);
+		}
+	}
 }
 
 

@@ -4,17 +4,32 @@ using System;
 
 namespace Tree
 {
-    public class If : Special
-    {
-        // TODO: Add any fields needed.
- 
-        // TODO: Add an appropriate constructor.
-	public If() { }
+	public class If : Special
+	{
 
-        public override void print(Node t, int n, bool p)
-        {
-            // TODO: Implement this function.
-        }
-    }
+		public If () { }
+
+		public override void print ( Node t, int n, bool p )
+		{
+			for ( int i = Console.CursorLeft; i < n; i++ )
+				Console.Write(" ");
+
+			Console.Write("if ");
+
+			t.getCdr().getCar().print(0, false);
+
+			Console.WriteLine();
+
+			Node blocks = t.getCdr().getCdr();
+
+			while ( !blocks.isNull() )
+			{
+				blocks.getCar().print(n + 4);
+				Console.WriteLine();
+				blocks = blocks.getCdr();
+			}
+
+			blocks.print(n, true);
+		}
+	}
 }
-

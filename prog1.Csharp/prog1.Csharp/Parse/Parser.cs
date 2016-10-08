@@ -48,7 +48,7 @@ namespace Parse
 		private bool tokensRead;
 
 		private const int BUFSIZE = 1000;
-		private int i;
+		private int i, lParen, rParen;
 		public Token[] tokens;
 
 		#endregion
@@ -125,14 +125,14 @@ namespace Parse
 			// If our token is a QUOTE...
 			else if ( tt == TokenType.QUOTE )
 			{
-                //print("\'");
-                Ident newIdent = new Ident("quote");
-                i++;
-                Node newNode = parseExp();
-                if (newNode.isNull())
-                    return new Cons(newIdent, newNode);
-                else
-                    return new Cons(newIdent, new Cons(newNode, new Nil()));
+				//print("\'");
+				Ident newIdent = new Ident("quote");
+				i++;
+				Node newNode = parseExp();
+				if (newNode.isNull())
+					return new Cons(newIdent, newNode);
+				else
+					return new Cons(newIdent, new Cons(newNode, new Nil()));
 			}
 
 			return null;
@@ -185,11 +185,24 @@ namespace Parse
 
 			do
 			{
-				tok = scanner.getNextToken();
+				if ( rParen <= lParen )
+					tok = scanner.getNextToken();
+				else
+					tok = null;
 
 				if ( tok != null )
 				{
-					tokens[i] = tok;
+					if (tok.getType() == TokenType.LPAREN )
+					{
+						lParen++;
+					}
+					else if ( tok.getType() == TokenType.RPAREN )
+					{
+						rParen++;
+					}
+
+					if (rParen <= lParen)
+						tokens[i] = tok;
 					i++;
 				}
 			} while ( tok != null );

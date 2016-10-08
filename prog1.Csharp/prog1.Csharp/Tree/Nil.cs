@@ -6,6 +6,8 @@ namespace Tree
 {
 	public class Nil : Node
 	{
+		private static Nil nil;
+
 		public Nil() { }
 
 		public override void print(int n)
@@ -16,6 +18,13 @@ namespace Tree
 		public override bool isNull ()
 		{
 			return true;
+		}
+
+		public static Nil getNil ()
+		{
+			if ( nil == null )
+				nil = new Nil();
+			return nil;
 		}
 
 		public override void print(int n, bool p) {

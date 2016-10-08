@@ -4,36 +4,40 @@ using System;
 
 namespace Tree
 {
-    public class Regular : Special
-    {
-        // TODO: Add any fields needed.
-    
-        // TODO: Add an appropriate constructor.
-        public Regular() { }
+	public class Regular : Special
+	{
+		public Regular () { }
 
-        public override void print(Node t, int n, bool p)
-        {
+		public override void print ( Node t, int n, bool p )
+		{
+			for ( int i = Console.CursorLeft; i < n; i++ )
+			{
+				Console.Write(" ");
+			}
+
 			if ( !p )
 			{
 				Console.Write("(");
 			}
-			if ( t.getCar().isSymbol() || t.getCar().isNumber() || t.getCar().isBool() || t.getCar().isString() )
+			else
 			{
-				t.getCar().print(1);
-			}
-			else if ( t.getCar().isPair() )
-			{
-				t.getCar().print(0);
+				Console.Write(" ");
 			}
 
-			if ( t.getCdr().isPair() )
+			Node car = t.getCar();
+
+			car.print(n, !car.isPair());
+
+			if ( t.getCdr().isPair() || t.getCdr().isNull() )
+				t.getCdr().print(n, true);
+			else
 			{
-				t.getCdr().print(1, true);
-				if ( !t.getCdr().getCar().isPair() )
-					Console.Write(")");
+				Console.Write(" . ");
+				t.getCdr().print(n, true);
+				Console.Write(")");
 			}
-        }
-    }
+		}
+	}
 }
 
 

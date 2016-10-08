@@ -59,7 +59,7 @@ namespace Tree
 				{
 					form = new Quote();
 				}
-				else if ( car.GetName() == "set")
+				else if ( car.GetName() == "set!")
 				{
 					form = new Set();
 				}

@@ -151,7 +151,7 @@ namespace Parse
 				}
 
 				// Identifiers
-				else if ( (ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z')
+				else if ( (ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z' || ch == '=' || ch == '-' || ch == '+' || ch == '/' || ch == '*' )
 						 // or ch is some other valid first character
 						 // for an identifier
 						 )

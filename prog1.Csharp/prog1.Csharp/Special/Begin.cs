@@ -31,12 +31,13 @@ namespace Tree
 				rest = rest.getCdr();
 				while ( !rest.isNull() )
 				{
+					Console.WriteLine();
 					rest.getCar().print(n + 4, false);
 
 					rest = rest.getCdr();
 				}
-
-				Console.Write(")");
+				Console.WriteLine();
+				rest.print(n, true);
 			}
 			else t.getCdr().print(n, true);
 		}

@@ -22,6 +22,7 @@ namespace Tree
 			Console.Write("lambda ");
 
 			t.getCdr().getCar().print(0, false);
+			Console.WriteLine();
 
 			Node temp = t.getCdr().getCdr();
 
@@ -37,6 +38,7 @@ namespace Tree
 				temp = temp.getCdr();
 			}
 
+			Console.WriteLine();
 			temp.print(n, true);
 		}
 	}

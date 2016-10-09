@@ -46,7 +46,7 @@ namespace Tree
 					rest = rest.getCdr();
 				}
 				Console.WriteLine();
-				Console.Write(")");
+				rest.print(n, true);
 			}
 			else
 			{

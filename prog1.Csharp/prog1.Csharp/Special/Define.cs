@@ -23,35 +23,38 @@ namespace Tree
 
 			Node rest = t.getCdr();
 
-			if ( rest.getCar().isPair() )
-			{
-				Console.Write(" ");
-				rest.getCar().print(n + 4, false);
-				Console.WriteLine();
+            if (rest.isNull())
+                rest.print(0, true);
 
-				if ( rest.getCdr().getCar() != null )
-				{
-					if ( rest.getCdr().getCar().isPair() )
-					{
-						for ( int i = Console.CursorLeft; i < n + 4; i++ )
-							Console.Write(" ");
-					}
-				}
+            else if (rest.getCar().isPair())
+            {
+                Console.Write(" ");
+                rest.getCar().print(n + 4, false);
+                Console.WriteLine();
 
-				rest = rest.getCdr();
-				while ( !rest.isNull() )
-				{
-					rest.getCar().print(n + 4, false);
+                if (rest.getCdr().getCar() != null)
+                {
+                    if (rest.getCdr().getCar().isPair())
+                    {
+                        for (int i = Console.CursorLeft; i < n + 4; i++)
+                            Console.Write(" ");
+                    }
+                }
 
-					rest = rest.getCdr();
-				}
-				Console.WriteLine();
-				rest.print(n, true);
-			}
-			else
-			{
-				t.getCdr().print(n, true);
-			}
+                rest = rest.getCdr();
+                while (!rest.isNull())
+                {
+                    rest.getCar().print(n + 4, false);
+
+                    rest = rest.getCdr();
+                }
+                Console.WriteLine();
+                rest.print(n, true);
+            }
+            else
+            {
+                t.getCdr().print(n, true);
+            }
 		}
 	}
 }

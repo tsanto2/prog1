@@ -25,8 +25,10 @@ namespace Tree
 		// There got to be a more efficient way to print n spaces.
 			for (int i = 0; i < n; i++)
 				Console.Write(" ");
-
-			Console.Write(name);
+			if ( name == "quote" )
+				Console.Write("'");
+			else
+				Console.Write(name);
 		}
 	}
 }

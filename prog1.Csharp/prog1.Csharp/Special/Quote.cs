@@ -10,27 +10,20 @@ namespace Tree
 
 		public override void print ( Node t, int n, bool p )
 		{
-			for ( int i = Console.CursorLeft; i < n; i++ )
-			{
-				Console.Write(" ");
-			}
-
 			t.getCar().print(n);
 
-			Node list = t.getCdr();
+			Node cdr = t.getCdr();
 
-			Console.Write("(");
-
-			while ( !list.isNull() )
+			while ( !cdr.isNull() )
 			{
-				list.getCar().print(n);
-				list = list.getCdr();
+				cdr.getCar().print(0);
+				cdr = cdr.getCdr();
 
-				if ( !list.isNull() )
+				if ( !cdr.isNull() )
 					Console.Write(" ");
 			}
-
-			//Nil.getNil().print(n, true);
+			if (!t.getCdr().getCar().isPair())
+				Console.WriteLine();
 		}
 	}
 }

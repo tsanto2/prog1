@@ -29,7 +29,7 @@ namespace Tree
             {
                 Console.WriteLine();
                 cdr.getCar().print(n + 4, false);
-                if (!cdr.getCar().isPair())
+                //if (!cdr.getCar().isPair())
                     Console.WriteLine();
 
                 cdr = cdr.getCdr();

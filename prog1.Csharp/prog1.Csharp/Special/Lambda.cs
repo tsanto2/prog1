@@ -21,6 +21,7 @@ namespace Tree
 
 			Console.Write("lambda ");
 
+
 			t.getCdr().getCar().print(0, false);
 			Console.WriteLine();
 

@@ -19,28 +19,32 @@ namespace Tree
 				Console.Write("(");
 			}
 
-			Console.Write("if ");
+			Console.Write("if");
+            if (t.getCdr().isNull())
+                t.getCdr().print(0, true);
+            else
+            {
+                t.getCdr().getCar().print(1, false);
+                Console.WriteLine();
 
-			t.getCdr().getCar().print(0, false);
-			Console.WriteLine();
+                Node temp = t.getCdr().getCdr();
 
-			Node temp = t.getCdr().getCdr();
+                while (!temp.isNull())
+                {
+                    if (!temp.getCar().isPair())
+                    {
+                        temp.getCar().print(n + 4);
+                        Console.WriteLine();
+                    }
+                    else
+                        temp.getCar().print(n + 4, false);
+                    temp = temp.getCdr();
+                }
 
-			while ( !temp.isNull() )
-			{
-				if ( !temp.getCar().isPair() )
-				{
-					temp.getCar().print(n + 4);
-					Console.WriteLine();
-				}
-				else
-					temp.getCar().print(n + 4, false);
-				temp = temp.getCdr();
-			}
+                Console.WriteLine();
 
-			Console.WriteLine();
-
-			temp.print(n, true);
-		}
-	}
+                temp.print(n, true);
+                }
+            }
+	    }
 }
